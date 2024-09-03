@@ -1,6 +1,6 @@
-import "./Form.css";
-import React, {useCallback, useEffect, useState} from "react";
-import {useTelegram} from "../../hooks/useTelegram"
+import React, {useCallback, useEffect, useState} from 'react';
+import './Form.css';
+import {useTelegram} from "../../hooks/useTelegram";
 
 const Form = () => {
     const [country, setCountry] = useState('');
@@ -14,15 +14,15 @@ const Form = () => {
             street,
             subject
         }
-        tg.sendData(JSON.stringify(data))
+        tg.sendData(JSON.stringify(data));
     }, [country, street, subject])
 
     useEffect(() => {
-        tg.onEvent("mainButtonClicked", onSendData)
+        tg.onEvent('mainButtonClicked', onSendData)
         return () => {
-            tg.offEvent("mainButtonClicked", onSendData)
+            tg.offEvent('mainButtonClicked', onSendData)
         }
-    }, [onSendData()]);
+    }, [onSendData])
 
     useEffect(() => {
         tg.MainButton.setParams({
@@ -31,7 +31,7 @@ const Form = () => {
     }, [])
 
     useEffect(() => {
-        if (!street || !country){
+        if(!street || !country) {
             tg.MainButton.hide();
         } else {
             tg.MainButton.show();
@@ -41,16 +41,18 @@ const Form = () => {
     const onChangeCountry = (e) => {
         setCountry(e.target.value)
     }
+
     const onChangeStreet = (e) => {
         setStreet(e.target.value)
     }
+
     const onChangeSubject = (e) => {
         setSubject(e.target.value)
     }
 
     return (
         <div className={"form"}>
-            <h3 className={'text'}>Введите ваши данные</h3>
+            <h3>Введите ваши данные</h3>
             <input
                 className={'input'}
                 type="text"
@@ -66,8 +68,8 @@ const Form = () => {
                 onChange={onChangeStreet}
             />
             <select value={subject} onChange={onChangeSubject} className={'select'}>
-                <option value={'physical'}>Физ. Лицо</option>
-                <option value={'legal'}>Юр. Лицо</option>
+                <option value={'physical'}>Физ. лицо</option>
+                <option value={'legal'}>Юр. лицо</option>
             </select>
         </div>
     );
