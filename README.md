@@ -31,9 +31,10 @@ Frontend - React (react-router-dom), for webApp use Netlify
 1. Создайте новый сайт на Netlify.
 2. Добавьте файл netlify.toml со следующими настройками:
 ``` toml
-[build]
-  command = "npm run build"
-  publish = "build"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 ```
 3. Разверните сайт.
 Теперь вы можете просматривать приложение в браузере по адресу, указанному на странице сайта.
